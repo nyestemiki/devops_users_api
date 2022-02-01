@@ -3,12 +3,32 @@ const cors = require('cors')
 const _ = require('lodash')
 const bodyParser = require('body-parser')
 const uuid = require('uuid')
+const winston = require('winston')
+const expressWinston = require('express-winston')
 
 const app = express()
 
 app.use(cors())
 app.use(bodyParser.urlencoded({ extended: true }))
 app.use(bodyParser.json())
+app.use(
+	expressWinston.logger({
+		transports: [
+			new winston.transports.File({
+				filename: './logs/info.logs',
+				level: 'info'
+			}),
+			new winston.transports.File({
+				filename: './logs/info.logs',
+				level: 'error'
+			})
+		],
+		meta: true,
+		msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms"',
+		expressFormat: true,
+		colorize: false
+	})
+)
 
 // user: { id, name, email, photo, phone, address }
 const users = []
