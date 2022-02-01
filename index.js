@@ -20,7 +20,7 @@ app.get('/users', (_, res) => {
 })
 
 app.get('/user/:id', (req, res) => {
-	res.send(JSON.stringify(_.filter(users, { id: req.params.id })?.[0]))
+	res.send(JSON.stringify(_.filter(users, { id: req.params.id })[0]))
 })
 
 app.post('/user', (req, res) => {
