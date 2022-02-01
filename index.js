@@ -15,7 +15,7 @@ app.use(
 	expressWinston.logger({
 		transports: [
 			new winston.transports.File({
-				filename: './logs/info.logs',
+				filename: './users_api/logs/info.logs',
 				level: 'info'
 			}),
 			new winston.transports.File({
