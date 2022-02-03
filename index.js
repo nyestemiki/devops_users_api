@@ -19,14 +19,13 @@ app.use(
 				level: 'info'
 			}),
 			new winston.transports.File({
-				filename: './logs/info.logs',
+				filename: './users_api/logs/error.logs',
 				level: 'error'
 			})
 		],
-		meta: true,
-		msg: 'HTTP {{req.method}} {{req.url}} {{res.statusCode}} {{res.responseTime}}ms"',
-		expressFormat: true,
-		colorize: false
+		format: winston.format.printf(
+			info => `${info.level} : winston : ${info.message} : ${info.meta.res.statusCode} : ${info.meta.responseTime}ms`
+		)
 	})
 )
 
